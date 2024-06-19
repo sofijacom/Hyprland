@@ -24,9 +24,10 @@ using namespace Hyprutils::String;
 
 static std::string execAndGet(std::string cmd) {
     cmd += " 2>&1";
-    std::array<char, 128>                          buffer;
-    std::string                                    result;
-    const std::unique_ptr<FILE, decltype(&pclose)> pipe(popen(cmd.c_str(), "r"), pclose);
+    std::array<char, 128> buffer;
+    std::string           result;
+    using PcloseType = int (*)(FILE*);
+    const std::unique_ptr<FILE, PcloseType> pipe(popen(cmd.c_str(), "r"), static_cast<PcloseType>(pclose));
     if (!pipe)
         return "";
 
@@ -426,7 +427,7 @@ bool CPluginManager::updateHeaders(bool force) {
 
     progress.printMessageAbove(std::string{Colors::YELLOW} + "!" + Colors::RESET + " Cloning https://github.com/hyprwm/hyprland, this might take a moment.");
 
-    const bool bShallow = HLVER.branch == "main" || HLVER.branch == "";
+    const bool bShallow = (HLVER.branch == "main" || HLVER.branch == "") && !m_bNoShallow;
 
     // let us give a bit of leg-room for shallowing
     // due to timezones, etc.

@@ -431,8 +431,9 @@ CConfigManager::CConfigManager() {
 
     m_pConfig->addConfigValue("master:special_scale_factor", {1.f});
     m_pConfig->addConfigValue("master:mfact", {0.55f});
-    m_pConfig->addConfigValue("master:new_is_master", Hyprlang::INT{1});
+    m_pConfig->addConfigValue("master:new_status", {"slave"});
     m_pConfig->addConfigValue("master:always_center_master", Hyprlang::INT{0});
+    m_pConfig->addConfigValue("master:new_on_active", {"none"});
     m_pConfig->addConfigValue("master:new_on_top", Hyprlang::INT{0});
     m_pConfig->addConfigValue("master:no_gaps_when_only", Hyprlang::INT{0});
     m_pConfig->addConfigValue("master:orientation", {"left"});
@@ -522,10 +523,13 @@ CConfigManager::CConfigManager() {
     m_pConfig->addConfigValue("opengl:force_introspection", Hyprlang::INT{2});
 
     m_pConfig->addConfigValue("cursor:no_hardware_cursors", Hyprlang::INT{0});
+    m_pConfig->addConfigValue("cursor:no_break_fs_vrr", Hyprlang::INT{0});
+    m_pConfig->addConfigValue("cursor:min_refresh_rate", Hyprlang::INT{24});
     m_pConfig->addConfigValue("cursor:hotspot_padding", Hyprlang::INT{1});
     m_pConfig->addConfigValue("cursor:inactive_timeout", Hyprlang::INT{0});
     m_pConfig->addConfigValue("cursor:no_warps", Hyprlang::INT{0});
     m_pConfig->addConfigValue("cursor:persistent_warps", Hyprlang::INT{0});
+    m_pConfig->addConfigValue("cursor:warp_on_change_workspace", Hyprlang::INT{0});
     m_pConfig->addConfigValue("cursor:default_monitor", {STRVAL_EMPTY});
     m_pConfig->addConfigValue("cursor:zoom_factor", {1.f});
     m_pConfig->addConfigValue("cursor:zoom_rigid", Hyprlang::INT{0});
